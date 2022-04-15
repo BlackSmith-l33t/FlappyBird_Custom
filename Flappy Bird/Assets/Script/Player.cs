@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public float jumpPower = 5;
-    public float maxSpeed = 5;
+    public event UnityAction OnDie;
+    public event UnityAction OnScore;
+
+    public float jumpPower = 3.5f;
+    public float maxSpeed = 3.5f;
 
     Rigidbody2D playerRigid;
 
@@ -16,7 +20,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             playerRigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
@@ -33,11 +37,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("게임 오버");
+        OnDie?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("점수 획득");
+        OnScore?.Invoke();
     }
 }

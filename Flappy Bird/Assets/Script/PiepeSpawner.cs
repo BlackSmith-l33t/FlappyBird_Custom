@@ -5,8 +5,8 @@ using UnityEngine;
 public class PiepeSpawner : MonoBehaviour
 {
     public Pipe pipe;
-    public float spawnDistance = 5;
-    public float spawnDelay = 2 ;
+    public float spawnDistance = 6;
+    public float spawnDelay = 4;
     public float randomRange = 3;
     float random;
     private void OnEnable()
