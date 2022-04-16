@@ -36,8 +36,9 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other)
-    {
-        OnDie?.Invoke();
+    {      
+        Destroy(gameObject, 0.6f);
+        OnDie?.Invoke();       
     }
 
     private void OnTriggerEnter2D(Collider2D other)

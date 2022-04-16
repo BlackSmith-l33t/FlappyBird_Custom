@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Text scoreCount;
     public Text endScore;
-    public Text bestCore;
-        
+    public Text bestCore;        
     public GameObject gameOverUI;
     
     int score = 0;
     int iEndscore = 0;
+    bool bDead = false;
 
     private void Awake()
     {
@@ -45,11 +45,17 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(true);
 
         Time.timeScale = 0.7F;
-        Destroy(GetComponent<Player>());
+
+        GetComponent<PiepeSpawner>().enabled = false;
+        bDead = true;
     }
 
     private void UpScore()
     {       
+        if (bDead)
+        {
+            return;
+        }
         score++;
         scoreCount.text = score.ToString();
         iEndscore = score;
