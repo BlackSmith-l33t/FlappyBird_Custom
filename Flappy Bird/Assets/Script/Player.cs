@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public event UnityAction OnDie;
     public event UnityAction OnScore;
 
-    public float jumpPower = 3.5f;
+    public float jumpPower = 4.0f;
     public float maxSpeed = 3.5f;
 
     Rigidbody2D playerRigid;
