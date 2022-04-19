@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Text endScore;
     public Text bestCore;        
     public GameObject gameOverUI;
+    public GameObject gameReadyUI;
     
     int score = 0;
     int iEndscore = 0;
@@ -24,13 +25,33 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player.OnDie += GameOver;
-        player.OnScore += UpScore;
+        player.OnScore += UpScore;        
     }
 
+    private void Start()
+    {
+        Time.timeScale = 0.0F;
+        player.GetComponent<Animator>().enabled = false;        
+    }
+
+    private void Update()
+    {
+        GameStart();
+    }
     public void ReStart()
     {
         SceneManager.LoadScene("GameScene");
         Time.timeScale = 1.0F;
+    }
+
+    private void GameStart()
+    {
+        if (player.bStart && player)
+        {
+            Time.timeScale = 1.0F;
+            player.GetComponent<Animator>().enabled = true;
+            gameReadyUI.SetActive(false);
+        }
     }
 
     private void GameOver()
